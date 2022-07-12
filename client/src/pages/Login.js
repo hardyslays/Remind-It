@@ -1,23 +1,17 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useState} from 'react'
+import {  useNavigate } from 'react-router-dom';
+import { updateToken } from '../Redux/Reducer/auth';
+import { URL_DASHBOARD, URL_REGISTER } from '../Helpers/urls';
+import { useDispatch } from 'react-redux';
 
 function Login({login, setLogin}) {
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    useEffect(() => {
-        if(login === true){
-            navigate('/dashboard')
-        }
-
-        return () => {
-            
-        };
-    });
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -38,12 +32,15 @@ function Login({login, setLogin}) {
             alert(res.message)
         }
         else{
-            localStorage.setItem('token', res.data.token)
-            console.log(localStorage.getItem('token'))
+            // localStorage.setItem('token', res.data.token)
+            // console.log(localStorage.getItem('token'))
 
-            setLogin(true)
-            alert('Login succesful')
-            navigate('/dashboard')
+            // setLogin(true)
+            // alert('Login succesful')
+            // navigate('/dashboard')
+            console.log(res.data);
+            dispatch(updateToken(res.data.token));
+            navigate(URL_DASHBOARD)
         }
     }
 

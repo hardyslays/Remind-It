@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = ({login, logout}) => {
-    const navigate = useNavigate()
+const Dashboard = () => {
+    
     const [username, setUsername] = useState("user")
 
     const loadUserDashboard = () => {
@@ -21,30 +21,10 @@ const Dashboard = ({login, logout}) => {
             setUsername(data.username)
         })
     }
-    
-    useEffect(() => {
-        const token = localStorage.getItem('token')
 
-        console.log(token)
-
-        if(!login || !token){
-            logout();
-            navigate('/', {replace: true})
-        }
-        else loadUserDashboard();
-
-
-        return () => {
-            
-        };
-    }, []);
-
-    useEffect( () => {
-        if(!login){
-            navigate('/', {replace: true})
-        }
-    }, [login])
-
+    // useEffect(() => {
+    //     loadUserDashboard();
+    // },[]);
 
     return (
         <>
@@ -55,4 +35,4 @@ const Dashboard = ({login, logout}) => {
         </>
     )
 }
-export default Dashboard
+export default Dashboard;

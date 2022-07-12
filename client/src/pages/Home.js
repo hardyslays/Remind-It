@@ -1,16 +1,7 @@
 import React, {useEffect} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 
-const Home = ({login}) => {
-    const navigate = useNavigate()
-
-    useEffect( () => {
-        if(login === true){
-            navigate('/dashboard')
-        }
-        return () => {
-        }
-    })
+const Home = () => {
 
     return (
         <div>

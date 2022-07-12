@@ -14,6 +14,8 @@ const registerUser = async (req, res) => {
 
   try {
     console.log("Post: registerUser");
+    console.log("name : ", req.body.name);
+    console.log("email : ", req.body.email);
 
     const user = await db.User.findOne({ email: req.body.email });
     if (user) {
@@ -24,20 +26,27 @@ const registerUser = async (req, res) => {
 
     const hashedPass = convertToBcrypt(req.body.password);
 
-    await db.User.create({
+    const newUser = new db.User({
       name: req.body.name,
       email: req.body.email,
       password: hashedPass,
     });
+
+    await newUser.save();
+
+    console.log("successfull register");
     return res.status(STATUSCODE.SUCCESS.CODE).json({
       message: STATUSCODE.SUCCESS.MESSAGE,
     });
   } catch (err) {
+    console.log(err);
     return res
-      .status(STATUSCODE.UNAUTHORIZE.CODE)
-      .json({ error: err.message, message: STATUSCODE.UNAUTHORIZE.MESSAGE });
+      .status(STATUSCODE.INTERNAL_SERVER.CODE)
+      .json({ error: err.message, message: STATUSCODE.INTERNAL_SERVER.MESSAGE });
   }
 };
+
+
 
 const loginUser = async (req, res) => {
   const err = validationResult(req);
@@ -49,6 +58,8 @@ const loginUser = async (req, res) => {
 
   try {
     console.log("Post: loginUser");
+    console.log("email : ", req.body.email);
+    console.log("password : ", req.body.password);
 
     const user = await db.User.findOne({
       email: req.body.email,
@@ -76,7 +87,8 @@ const loginUser = async (req, res) => {
       },
       process.env.JWT_SECRET
     );
-
+    console.log("token : ", token);
+    console.log("successfull login");
     return res.status(STATUSCODE.SUCCESS.CODE).json({
       data: { token: token },
       message: STATUSCODE.SUCCESS.MESSAGE,

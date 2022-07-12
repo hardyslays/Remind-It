@@ -1,8 +1,8 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Register({login}) {
+function Register() {
 
     const navigate = useNavigate()
 
@@ -26,7 +26,7 @@ function Register({login}) {
         })
         
         const data = await res.json()
-
+        console.log(data);
         if(res.status !== 200) {
             alert(data.message)
         }
@@ -36,14 +36,6 @@ function Register({login}) {
         }
     }
 
-    useEffect(() => {
-        if(login === true){
-            navigate('/dashboard')
-        }
-        return () => {
-            
-        };
-    });
 
   return (
     <>
