@@ -1,16 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@500&family=Oswald&display=swap');
+
 *{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+
 }
 body{
     width: 100vw;
     height: 100vh;
+    
+    font-family: 'Edu QLD Beginner', cursive;
+    font-family: 'Oswald', sans-serif;
     font-size: 25px;
-    background: linear-gradient(to bottom right, hsl(261, 72%, 27%)  10%, hsl(298, 76%, 20%)  60%,hsl(350, 100%, 42%));
-    color: rgb(234, 234, 234);
 
-    display: flex;
+    background-color: #47B5FF;
+    color: #06283D;
+
+    /* display: flex;
     justify-content: center;
-    text-align: center;
+    text-align: center; */
 }
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: blue orange;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: orange;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;
+    border: 3px solid orange;
+  }

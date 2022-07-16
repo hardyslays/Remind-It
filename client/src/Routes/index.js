@@ -1,26 +1,41 @@
-import React, { lazy } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { URL_LOGIN, URL_REGISTER } from "../Helpers/urls";
 import ProtectedRoute from "./protected";
+import unauthorizedRoutes from "./unauthorized";
 import { useSelector } from "react-redux";
+import { URL_HOME, URL_LOGIN, URL_DASHBOARD } from "../Helpers/urls";
+import Navbar from "../Components/Navbar/Navbar";
 
-const Login = lazy(() => import("../pages/Login"));
-const Register = lazy(() => import("../pages/Register"));
+import Home from "../pages/Home";
 
 export const AppRoutes = () => {
   const token = useSelector((state) => state.auth.token);
 
   return (
     <BrowserRouter>
+
       <Routes>
-        <Route path={URL_REGISTER} element={<Register />} />
-        <Route path={URL_LOGIN} element={<Login />} />
+        <Route path={URL_HOME} element={<Home />} exact />
+
+        {unauthorizedRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              !token ? (
+                <Component />
+              ) : (
+                <Navigate to={URL_DASHBOARD} replace={true} />
+              )
+            }
+          />
+        ))}
+
         {ProtectedRoute.map(({ path, Component }) => (
           <Route
             key={path}
             path={path}
             element={
-              token ? <Component /> : <Navigate to={Login} replace={true} />
+              token ? <Component /> : <Navigate to={URL_LOGIN} replace={true} />
             }
           />
         ))}

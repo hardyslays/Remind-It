@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../Components/Navbar/Navbar';
 
 function Register() {
 
@@ -38,7 +39,8 @@ function Register() {
 
 
   return (
-    <>
+    <>  
+        <Navbar/>
         <h1>Register</h1>
         <form onSubmit={handleSubmit} >
             <input value={name} placeholder="name" onChange={e => setName(e.target.value)}/>

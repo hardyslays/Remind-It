@@ -1,12 +1,12 @@
+import React from "react";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./styles/theme";
 
-import './App.css';
-import React from 'react'
+import { Provider } from "react-redux";
+import store from "./Redux/store";
 
-
-import { Provider } from 'react-redux';
-import store from './Redux/store';
-import { AppRoutes } from './Routes';
-
+import { AppRoutes } from "./Routes";
+import Navbar from "./Components/Navbar/Navbar";
 
 // function App() {
 
@@ -18,12 +18,12 @@ import { AppRoutes } from './Routes';
 //     }
 
 //     useEffect(() => {
-        
+
 //         const token = localStorage.getItem('token')
 //         setLogin(token ? true : false)
 
 //         return () => {
-            
+
 //         };
 //     }, []);
 
@@ -46,12 +46,14 @@ import { AppRoutes } from './Routes';
 //   );
 // }
 
-
 const App = () => {
-    return <Provider store={store}>
+  return (
+    <ChakraProvider theme={theme}>
+      <Provider store={store}>
         <AppRoutes />
-    </Provider>
-}
-
+      </Provider>
+    </ChakraProvider>
+  );
+};
 
 export default App;

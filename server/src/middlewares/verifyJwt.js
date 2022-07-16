@@ -2,7 +2,7 @@ const db = require("../models");
 const jwt = require("jsonwebtoken");
 const STATUSCODE = require("../helpers/statusCode");
 
-const verifyJwtToken = function (req, res, next) {
+const verifyJwt = function (req, res, next) {
   const token = req.headers["x-access-token"];
 
   try {
@@ -30,4 +30,4 @@ const verifyJwtToken = function (req, res, next) {
   next();
 };
 
-module.exports = verifyJwtToken;
+module.exports = verifyJwt;
